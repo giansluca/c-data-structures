@@ -1,3 +1,4 @@
+#include "modules/array_test.h"
 #include "unity/unity.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,17 +11,8 @@ void tearDown(void) {
     // Add any necessary teardown code here
 }
 
-void test_function_should_doBlahAndBlah(void) {
-    // test stuff
-}
-
-void test_function_should_doAlsoDoBlah(void) {
-    // more test stuff
-}
-
 int main() {
     UNITY_BEGIN();
-    RUN_TEST(test_function_should_doBlahAndBlah);
-    RUN_TEST(test_function_should_doAlsoDoBlah);
+    RUN_TEST(test_one);
     return UNITY_END();
 }

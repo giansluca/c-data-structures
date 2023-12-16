@@ -9,6 +9,7 @@ set_target_properties(unity-framework PROPERTIES PUBLIC_HEADER "${UNITY_HEADER_F
 add_executable(runner_test)
 target_sources(runner_test PRIVATE 
     runner_test.c
+    modules/array_test.c
 )
 
 target_link_libraries(runner_test PRIVATE data-structures unity-framework)

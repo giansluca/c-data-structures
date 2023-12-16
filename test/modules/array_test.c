@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 void test_one() {
-    printf("wewe");
-    int a = 4;
+    int a = 5;
     TEST_ASSERT_EQUAL_INT(5, a);
 }
