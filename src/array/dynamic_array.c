@@ -1,21 +1,22 @@
 #include "dynamic_array.h"
 #include "../various/utils.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 void extend_items_array(DynamicArray *array);
 
-DynamicArray *create_array(int length) {
+DynamicArray *create_array(int initial_capacity) {
     // allocate space for the struct
     DynamicArray *new_array = malloc(sizeof(DynamicArray));
-    new_array->capacity = length;
+    new_array->capacity = initial_capacity;
     new_array->count = 0;
 
     // allocate space for the array
-    new_array->items = malloc(length * sizeof(int));
+    new_array->items = malloc(initial_capacity * sizeof(int));
 
     // initialize array element to 0
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < initial_capacity; i++) {
         new_array->items[i] = 0;
     }
 
@@ -29,16 +30,16 @@ void insert_item(DynamicArray *array, int item) {
     }
 
     // insert new element
-    int count = array->count;
-    array->items[count] = item;
+    int index = array->count;
+    array->items[index] = item;
     array->count++;
 }
 
 void insert_at(DynamicArray *array, int item, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
-        printf("Illegal index\n");
-        exit(-1);
+        printf("Illegal index: %d\n", index);
+        return;
     }
 
     // if array is full, extend the array.
@@ -58,8 +59,8 @@ void insert_at(DynamicArray *array, int item, int index) {
 void remove_at(DynamicArray *array, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
-        printf("Illegal index\n");
-        exit(-1);
+        printf("Illegal index: %d\n", index);
+        return;
     }
 
     // shift elements to fill the hole
@@ -99,19 +100,17 @@ void reverse_array(DynamicArray *array) {
 
     while (start < end) {
         // swap start with end
-        swap_int_array(&array->items[start], &array->items[end]);
+        swap_int_values(&array->items[start], &array->items[end]);
         start++;
         end--;
     }
 }
 
 /*
- * Extend the items array capacity
- * new array capacity = count + capacity (every extension will be the double)
+ * New array capacity = count + capacity (every extension will be the double)
  */
 void extend_items_array(DynamicArray *array) {
-    // create new array with extended capacity (new array capacity the double of
-    // the previous = count + capacity)
+    // create new array with extended capacity
     int new_capacity = array->count + array->capacity;
     int *new_items = malloc(new_capacity * sizeof(int));
 
@@ -122,9 +121,31 @@ void extend_items_array(DynamicArray *array) {
 
     // set new items array to current items array
     free(array->items);
-
     array->items = new_items;
     array->capacity = new_capacity;
+}
+
+int *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size, int *result_count) {
+    // get size for the result array and allocate space as the max result possible
+    int result_size = array->count;
+    int *result = malloc(result_size * sizeof(int));
+
+    // loop over the arrays to find intersections
+    for (int i = 0; i < array->count; i++) {
+        int element = array->items[i];
+
+        for (int j = 0; j < array_to_compare_size; j++) {
+            if (array_to_compare[j] == element) {
+                // if value is not already present
+                if (!is_int_value_present(result, *result_count, element)) {
+                    // increase pointer count and add the value to he result array
+                    result[*result_count] = element;
+                    *result_count += 1;
+                }
+            }
+        }
+    }
+    return result;
 }
 
 void print_dynamic_array(DynamicArray *array) {

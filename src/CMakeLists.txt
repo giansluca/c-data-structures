@@ -1,26 +1,18 @@
 set(SOURCE_FILES
         various/utils.c
         array/dynamic_array.c
-        array/array_driver.c
         linked_list/s_linked_list.c
-        linked_list/linked_list_driver.c
         stack/array_stack.c
-        stack/stack_driver.c
         queue/array_queue.c
-        queue/priority_queue.c
-        queue/queue_driver.c)
+        queue/priority_queue.c)
 
 set(HEADER_FILES
         various/utils.h
         array/dynamic_array.h
-        array/array_driver.h
         linked_list/s_linked_list.h
-        linked_list/linked_list_driver.h
         stack/array_stack.h
-        stack/stack_driver.h
         queue/array_queue.h
-        queue/priority_queue.h
-        queue/queue_driver.h)
+        queue/priority_queue.h)
 
 add_library(data-structures STATIC)
 target_sources(data-structures PRIVATE ${SOURCE_FILES})
