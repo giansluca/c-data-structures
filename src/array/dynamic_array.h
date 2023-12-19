@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stddef.h>
 
 #ifndef DATASTRUCTURES_DYNAMIC_ARRAY_H
@@ -16,7 +17,8 @@ void remove_at(DynamicArray *array, int index);
 int index_of(DynamicArray *array, int item);
 int max_element(DynamicArray *array);
 void reverse_array(DynamicArray *array);
-int *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size, int *result_count);
+DynamicArray *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size);
+bool is_value_present(DynamicArray *array, int value);
 void print_dynamic_array(DynamicArray *array);
 
 #endif // DATASTRUCTURES_DYNAMIC_ARRAY_H

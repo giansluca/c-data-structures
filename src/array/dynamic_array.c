@@ -1,5 +1,6 @@
 #include "dynamic_array.h"
 #include "../various/utils.h"
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -125,10 +126,12 @@ void extend_items_array(DynamicArray *array) {
     array->capacity = new_capacity;
 }
 
-int *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size, int *result_count) {
+DynamicArray *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size) {
     // get size for the result array and allocate space as the max result possible
-    int result_size = array->count;
-    int *result = malloc(result_size * sizeof(int));
+    DynamicArray *result = malloc(sizeof(DynamicArray));
+    result->capacity = array->capacity;
+    result->count = 0;
+    result->items = malloc(array->count * sizeof(int));
 
     // loop over the arrays to find intersections
     for (int i = 0; i < array->count; i++) {
@@ -136,16 +139,26 @@ int *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t a
 
         for (int j = 0; j < array_to_compare_size; j++) {
             if (array_to_compare[j] == element) {
-                // if value is not already present
-                if (!is_int_value_present(result, *result_count, element)) {
-                    // increase pointer count and add the value to he result array
-                    result[*result_count] = element;
-                    *result_count += 1;
-                }
+                if (is_value_present(result, element))
+                    continue;
+
+                insert_item(result, element);
             }
         }
     }
     return result;
+}
+
+bool is_value_present(DynamicArray *array, int value) {
+    bool is_present = false;
+
+    for (int i = 0; i < array->count; i++) {
+        if (array->items[i] == value) {
+            is_present = true;
+        }
+    }
+
+    return is_present;
 }
 
 void print_dynamic_array(DynamicArray *array) {

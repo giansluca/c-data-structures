@@ -170,24 +170,40 @@ void it_should_reverse_the_array() {
 
 void it_should_find_common_elements() {
     // given
-    int initial_capacity = 10;
+    int initial_capacity = 3;
     DynamicArray *array = create_array(initial_capacity);
 
     insert_item(array, 7);
     insert_item(array, -2);
     insert_item(array, 9);
     insert_item(array, 1);
+    insert_item(array, 10);
+    insert_item(array, 19);
+    insert_item(array, 35);
+    insert_item(array, 1550);
+    insert_item(array, -900);
+    insert_item(array, 6);
 
-    int array_to_compare[] = {120, 2, 9, 32, 67, 2, 3, 4, 5, 6, 70, 1, 1, 1};
-    size_t array_to_compare_size = sizeof(array_to_compare) / sizeof(array_to_compare[0]);
-    int expected_result[2] = {9, 1};
+    int array_to_compare_1[] = {120, 2, 9, 32, 67, 2, 3, 4, 5, 6, 70, 1, 1, 1};
+    size_t array_to_compare_size_1 = sizeof(array_to_compare_1) / sizeof(array_to_compare_1[0]);
+    int expected_result_1[3] = {9, 1, 6};
+
+    int array_to_compare_2[] = {7, -2, 9, 1, 10, 19, 35, 1551, -900, 6};
+    size_t array_to_compare_size_2 = sizeof(array_to_compare_2) / sizeof(array_to_compare_2[0]);
+    int expected_result_2[9] = {7, -2, 9, 1, 10, 19, 35, -900, 6};
+
+    int array_to_compare_3[] = {999};
+    size_t array_to_compare_size_3 = sizeof(array_to_compare_3) / sizeof(array_to_compare_3[0]);
 
     // when
-    int result_count = 0;
-    int *result = find_commons_elements(array, array_to_compare, array_to_compare_size, &result_count);
+    DynamicArray *result_1 = find_commons_elements(array, array_to_compare_1, array_to_compare_size_1);
+    DynamicArray *result_2 = find_commons_elements(array, array_to_compare_2, array_to_compare_size_2);
+    DynamicArray *result_3 = find_commons_elements(array, array_to_compare_3, array_to_compare_size_3);
 
     // then
-    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result, result, result_count);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_1, result_1->items, result_1->count);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_2, result_2->items, result_2->count);
+    TEST_ASSERT_EQUAL_INT(0, result_3->count);
 }
 
 int main() {
