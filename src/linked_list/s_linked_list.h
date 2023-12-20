@@ -28,5 +28,6 @@ int *to_array(SLinkedList *list, int arraySize);
 void reverse(SLinkedList *list);
 bool is_list_empty(SLinkedList *list);
 void print_linked_list(SLinkedList *list);
+Node *get_node_at_index_from_end(SLinkedList *list, int index);
 
 #endif // DATASTRUCTURES_S_LINKED_LIST_H

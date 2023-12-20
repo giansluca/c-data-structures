@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *get_kth_from_end(SLinkedList *list, int k);
+// Node *get_kth_from_end(SLinkedList *list, int k);
 void print_middle_node(SLinkedList *list);
 void reverse_rec(SLinkedList *list, Node *node);
 void print_linked_list_rec(Node *head);
@@ -75,10 +75,10 @@ void list_driver() {
     print_linked_list(list);
 
     // kth node
-    Node *kth = get_kth_from_end(list, 2);
-    printf("***\n");
-    printf("%d\n", kth->data);
-    printf("***\n");
+    // Node *kth = get_kth_from_end(list, 2);
+    // printf("***\n");
+    // printf("%d\n", kth->data);
+    // printf("***\n");
 
     // middle node
     print_middle_node(list);
@@ -101,30 +101,30 @@ void list_driver() {
     print_linked_list(list2);
 }
 
-Node *get_kth_from_end(SLinkedList *list, int k) {
-    if (is_list_empty(list)) {
-        printf("List is empty\n");
-        exit(-1);
-    }
+// Node *get_kth_from_end(SLinkedList *list, int k) {
+//     if (is_list_empty(list)) {
+//         printf("List is empty\n");
+//         exit(-1);
+//     }
 
-    Node *a = list->first;
-    Node *b = list->first;
+//     Node *a = list->first;
+//     Node *b = list->first;
 
-    for (int i = 0; i < k - 1; i++) {
-        b = b->next;
-        if (b == NULL) {
-            printf("Invalid argument\n");
-            exit(-1);
-        }
-    }
+//     for (int i = 0; i < k - 1; i++) {
+//         b = b->next;
+//         if (b == NULL) {
+//             printf("Invalid argument\n");
+//             exit(-1);
+//         }
+//     }
 
-    while (b->next != NULL) {
-        b = b->next;
-        a = a->next;
-    }
+//     while (b->next != NULL) {
+//         b = b->next;
+//         a = a->next;
+//     }
 
-    return a;
-}
+//     return a;
+// }
 
 void print_middle_node(SLinkedList *list) {
     if (is_list_empty(list)) {

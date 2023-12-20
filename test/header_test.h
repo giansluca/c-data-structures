@@ -1,14 +1,3 @@
-
-// Array
-void it_should_insert_elements();
-void it_should_insert_and_remove_elements_at_index();
-void it_should_find_element_by_value();
-void it_should_find_the_max_element();
-void it_should_reverse_the_array();
-void it_should_find_common_elements();
-
-// Linked List
-
 // Runner stuff
 // typedef void (*test_func_pointers)(void);
 // typedef struct {

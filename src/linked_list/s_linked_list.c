@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *get_previous(SLinkedList *list, Node *node);
+Node *_get_previous(SLinkedList *list, Node *node);
 
 SLinkedList *create_linked_list() {
     SLinkedList *new_list = malloc(sizeof(SLinkedList));
@@ -100,7 +100,7 @@ void remove_last(SLinkedList *list) {
         free(temp);
     } else {
         // get previous node
-        Node *previous = get_previous(list, list->last);
+        Node *previous = _get_previous(list, list->last);
         previous->next = NULL;
 
         Node *temp = list->last;
@@ -194,7 +194,32 @@ void print_linked_list(SLinkedList *list) {
     }
 }
 
-Node *get_previous(SLinkedList *list, Node *node) {
+Node *get_node_at_index_from_end(SLinkedList *list, int index) {
+    if (is_list_empty(list)) {
+        printf("List is empty\n");
+        return NULL;
+    }
+
+    Node *a = list->first;
+    Node *b = list->first;
+
+    for (int i = 0; i < index - 1; i++) {
+        b = b->next;
+        if (b == NULL) {
+            printf("Invalid argument\n");
+            return NULL;
+        }
+    }
+
+    while (b->next != NULL) {
+        b = b->next;
+        a = a->next;
+    }
+
+    return a;
+}
+
+Node *_get_previous(SLinkedList *list, Node *node) {
     Node *current = list->first;
 
     while (current != NULL) {

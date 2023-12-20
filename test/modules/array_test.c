@@ -9,41 +9,41 @@ void it_should_insert_elements() {
     DynamicArray *array = create_array(initial_capacity);
 
     // when insert first three values
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 9);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 9);
 
     TEST_ASSERT_EQUAL_INT(3, array->capacity);
     TEST_ASSERT_EQUAL_INT(3, array->count);
-    TEST_ASSERT_EQUAL_INT(7, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(9, array->items[2]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(9, array->elements[2]);
 
     // when insert the fourth value, the array resize happens and capacity goes to 6
-    insert_item(array, 12);
+    insert_element(array, 12);
 
     TEST_ASSERT_EQUAL_INT(6, array->capacity);
     TEST_ASSERT_EQUAL_INT(4, array->count);
-    TEST_ASSERT_EQUAL_INT(12, array->items[3]);
+    TEST_ASSERT_EQUAL_INT(12, array->elements[3]);
 
     // when insert other values, another resize happens and capacity goes to 12
-    insert_item(array, 1);
-    insert_item(array, 120);
-    insert_item(array, -70);
+    insert_element(array, 1);
+    insert_element(array, 120);
+    insert_element(array, -70);
 
     TEST_ASSERT_EQUAL_INT(12, array->capacity);
     TEST_ASSERT_EQUAL_INT(7, array->count);
-    TEST_ASSERT_EQUAL_INT(1, array->items[4]);
-    TEST_ASSERT_EQUAL_INT(120, array->items[5]);
-    TEST_ASSERT_EQUAL_INT(-70, array->items[6]);
+    TEST_ASSERT_EQUAL_INT(1, array->elements[4]);
+    TEST_ASSERT_EQUAL_INT(120, array->elements[5]);
+    TEST_ASSERT_EQUAL_INT(-70, array->elements[6]);
 
     // when insert other values, last capacity resize to 24
-    insert_item(array, 1001);
-    insert_item(array, 1002);
-    insert_item(array, 1004);
-    insert_item(array, 1005);
-    insert_item(array, 1006);
-    insert_item(array, 1007);
+    insert_element(array, 1001);
+    insert_element(array, 1002);
+    insert_element(array, 1004);
+    insert_element(array, 1005);
+    insert_element(array, 1006);
+    insert_element(array, 1007);
 
     TEST_ASSERT_EQUAL_INT(24, array->capacity);
     TEST_ASSERT_EQUAL_INT(13, array->count);
@@ -54,36 +54,36 @@ void it_should_insert_and_remove_elements_at_index() {
     int initial_capacity = 10;
     DynamicArray *array = create_array(initial_capacity);
 
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 12);
-    insert_item(array, 230);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 12);
+    insert_element(array, 230);
 
     TEST_ASSERT_EQUAL_INT(4, array->count);
-    TEST_ASSERT_EQUAL_INT(7, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(12, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(230, array->items[3]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(12, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(230, array->elements[3]);
 
     // when insert at index 1
     insert_at(array, 999, 1);
 
     TEST_ASSERT_EQUAL_INT(5, array->count);
-    TEST_ASSERT_EQUAL_INT(7, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(999, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(12, array->items[3]);
-    TEST_ASSERT_EQUAL_INT(230, array->items[4]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(999, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(12, array->elements[3]);
+    TEST_ASSERT_EQUAL_INT(230, array->elements[4]);
 
     // when insert at index 0
     insert_at(array, 888, 0);
     TEST_ASSERT_EQUAL_INT(6, array->count);
-    TEST_ASSERT_EQUAL_INT(888, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(7, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(999, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[3]);
-    TEST_ASSERT_EQUAL_INT(12, array->items[4]);
-    TEST_ASSERT_EQUAL_INT(230, array->items[5]);
+    TEST_ASSERT_EQUAL_INT(888, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(999, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[3]);
+    TEST_ASSERT_EQUAL_INT(12, array->elements[4]);
+    TEST_ASSERT_EQUAL_INT(230, array->elements[5]);
 
     // when insert illegal index
     insert_at(array, 150, -3);
@@ -94,11 +94,11 @@ void it_should_insert_and_remove_elements_at_index() {
     remove_at(array, 1);
 
     TEST_ASSERT_EQUAL_INT(5, array->count);
-    TEST_ASSERT_EQUAL_INT(888, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(999, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(12, array->items[3]);
-    TEST_ASSERT_EQUAL_INT(230, array->items[4]);
+    TEST_ASSERT_EQUAL_INT(888, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(999, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(12, array->elements[3]);
+    TEST_ASSERT_EQUAL_INT(230, array->elements[4]);
 
     // when remove illegal index
     remove_at(array, -1);
@@ -111,9 +111,9 @@ void it_should_find_element_by_value() {
     int initial_capacity = 10;
     DynamicArray *array = create_array(initial_capacity);
 
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 9);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 9);
 
     // when
     int first_element_index = index_of(array, 7);
@@ -133,9 +133,9 @@ void it_should_find_the_max_element() {
     int initial_capacity = 10;
     DynamicArray *array = create_array(initial_capacity);
 
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 9);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 9);
 
     // when
     int max = max_element(array);
@@ -148,24 +148,24 @@ void it_should_reverse_the_array() {
     int initial_capacity = 10;
     DynamicArray *array = create_array(initial_capacity);
 
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 9);
-    insert_item(array, 800);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 9);
+    insert_element(array, 800);
 
-    TEST_ASSERT_EQUAL_INT(7, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(9, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(800, array->items[3]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(9, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(800, array->elements[3]);
 
     // when
     reverse_array(array);
 
     // then
-    TEST_ASSERT_EQUAL_INT(800, array->items[0]);
-    TEST_ASSERT_EQUAL_INT(9, array->items[1]);
-    TEST_ASSERT_EQUAL_INT(-2, array->items[2]);
-    TEST_ASSERT_EQUAL_INT(7, array->items[3]);
+    TEST_ASSERT_EQUAL_INT(800, array->elements[0]);
+    TEST_ASSERT_EQUAL_INT(9, array->elements[1]);
+    TEST_ASSERT_EQUAL_INT(-2, array->elements[2]);
+    TEST_ASSERT_EQUAL_INT(7, array->elements[3]);
 }
 
 void it_should_find_common_elements() {
@@ -173,16 +173,16 @@ void it_should_find_common_elements() {
     int initial_capacity = 3;
     DynamicArray *array = create_array(initial_capacity);
 
-    insert_item(array, 7);
-    insert_item(array, -2);
-    insert_item(array, 9);
-    insert_item(array, 1);
-    insert_item(array, 10);
-    insert_item(array, 19);
-    insert_item(array, 35);
-    insert_item(array, 1550);
-    insert_item(array, -900);
-    insert_item(array, 6);
+    insert_element(array, 7);
+    insert_element(array, -2);
+    insert_element(array, 9);
+    insert_element(array, 1);
+    insert_element(array, 10);
+    insert_element(array, 19);
+    insert_element(array, 35);
+    insert_element(array, 1550);
+    insert_element(array, -900);
+    insert_element(array, 6);
 
     int array_to_compare_1[] = {120, 2, 9, 32, 67, 2, 3, 4, 5, 6, 70, 1, 1, 1};
     size_t array_to_compare_size_1 = sizeof(array_to_compare_1) / sizeof(array_to_compare_1[0]);
@@ -201,8 +201,8 @@ void it_should_find_common_elements() {
     DynamicArray *result_3 = find_commons_elements(array, array_to_compare_3, array_to_compare_size_3);
 
     // then
-    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_1, result_1->items, result_1->count);
-    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_2, result_2->items, result_2->count);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_1, result_1->elements, result_1->count);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected_result_2, result_2->elements, result_2->count);
     TEST_ASSERT_EQUAL_INT(0, result_3->count);
 }
 
