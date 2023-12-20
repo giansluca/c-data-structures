@@ -47,7 +47,7 @@ void add_last(SLinkedList *list, int item) {
     list->size++;
 }
 
-int index_of_element(SLinkedList *list, int item) {
+int index_of_item(SLinkedList *list, int item) {
     int index = 0;
     Node *node = list->first;
 
@@ -63,7 +63,7 @@ int index_of_element(SLinkedList *list, int item) {
 }
 
 bool contains(SLinkedList *list, int item) {
-    return index_of_element(list, item) != -1;
+    return index_of_item(list, item) != -1;
 }
 
 void remove_first(SLinkedList *list) {
@@ -183,15 +183,27 @@ void reverse(SLinkedList *list) {
     list->first = previous;
 }
 
-bool is_list_empty(SLinkedList *list) { return list->first == NULL; }
+bool is_list_empty(SLinkedList *list) {
+    return list->first == NULL;
+}
 
-void print_linked_list(SLinkedList *list) {
-    Node *node = list->first;
-
-    while (node != NULL) {
-        printf("%d\n", node->data);
-        node = node->next;
+Node *get_node_at_index(SLinkedList *list, int index) {
+    if (is_list_empty(list)) {
+        printf("List is empty\n");
+        return NULL;
     }
+
+    Node *a = list->first;
+
+    for (int i = 0; i < index - 1; i++) {
+        a = a->next;
+        if (a == NULL) {
+            printf("Invalid argument\n");
+            return NULL;
+        }
+    }
+
+    return a;
 }
 
 Node *get_node_at_index_from_end(SLinkedList *list, int index) {
@@ -217,6 +229,15 @@ Node *get_node_at_index_from_end(SLinkedList *list, int index) {
     }
 
     return a;
+}
+
+void print_linked_list(SLinkedList *list) {
+    Node *node = list->first;
+
+    while (node != NULL) {
+        printf("%d\n", node->data);
+        node = node->next;
+    }
 }
 
 Node *_get_previous(SLinkedList *list, Node *node) {
