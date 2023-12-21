@@ -148,7 +148,7 @@ void remove_at_index(SLinkedList *list, int index) {
     }
 }
 
-int size(SLinkedList *list) { return list->size; }
+int list_size(SLinkedList *list) { return list->size; }
 
 int *to_array(SLinkedList *list, int arraySize) {
     Node *current = list->first;
@@ -193,17 +193,17 @@ Node *get_node_at_index(SLinkedList *list, int index) {
         return NULL;
     }
 
-    Node *a = list->first;
+    Node *node = list->first;
 
-    for (int i = 0; i < index - 1; i++) {
-        a = a->next;
-        if (a == NULL) {
+    for (int i = 0; i < index; i++) {
+        node = node->next;
+        if (node == NULL) {
             printf("Invalid argument\n");
             return NULL;
         }
     }
 
-    return a;
+    return node;
 }
 
 Node *get_node_at_index_from_end(SLinkedList *list, int index) {
@@ -215,7 +215,7 @@ Node *get_node_at_index_from_end(SLinkedList *list, int index) {
     Node *a = list->first;
     Node *b = list->first;
 
-    for (int i = 0; i < index - 1; i++) {
+    for (int i = 0; i < index; i++) {
         b = b->next;
         if (b == NULL) {
             printf("Invalid argument\n");

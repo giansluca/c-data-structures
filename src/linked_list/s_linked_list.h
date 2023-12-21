@@ -23,7 +23,7 @@ bool contains(SLinkedList *list, int item);
 void remove_first(SLinkedList *list);
 void remove_last(SLinkedList *list);
 void remove_at_index(SLinkedList *list, int index);
-int size(SLinkedList *list);
+int list_size(SLinkedList *list);
 int *to_array(SLinkedList *list, int arraySize);
 void reverse(SLinkedList *list);
 bool is_list_empty(SLinkedList *list);
