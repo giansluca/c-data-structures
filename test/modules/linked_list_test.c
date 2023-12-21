@@ -2,14 +2,14 @@
 #include "../unity/unity.h"
 #include <stdio.h>
 
-void it_should_insert_elements_at_beginning_and_at_end() {
+void it_should_insert_items_at_beginning_and_at_end() {
     // given
     SLinkedList *list = create_linked_list();
 
     // when add first
-    add_first(list, 18);
-    add_first(list, 23);
-    add_first(list, 500);
+    add_item_first(list, 18);
+    add_item_first(list, 23);
+    add_item_first(list, 500);
 
     Node *node_0 = get_node_at_index(list, 0);
     TEST_ASSERT_EQUAL_INT(500, node_0->data);
@@ -24,9 +24,9 @@ void it_should_insert_elements_at_beginning_and_at_end() {
     TEST_ASSERT_NULL(node_null);
 
     // when add last
-    add_last(list, -90);
-    add_last(list, 123);
-    add_last(list, 44);
+    add_item_last(list, -90);
+    add_item_last(list, 123);
+    add_item_last(list, 44);
 
     Node *node_4 = get_node_at_index(list, 3);
     TEST_ASSERT_EQUAL_INT(-90, node_4->data);
@@ -38,14 +38,13 @@ void it_should_insert_elements_at_beginning_and_at_end() {
     TEST_ASSERT_EQUAL_INT(44, node_6->data);
 
     // at this point list is: 500, 23, 18, -90. 123, 44
-    // when get index of item
+    // when get index of items
     TEST_ASSERT_EQUAL_INT(6, list_size(list));
 
     int index_1 = index_of_item(list, 500);
     int index_2 = index_of_item(list, 18);
     int index_3 = index_of_item(list, 44);
     int index_4 = index_of_item(list, 999);
-
     TEST_ASSERT_EQUAL_INT(0, index_1);
     TEST_ASSERT_EQUAL_INT(2, index_2);
     TEST_ASSERT_EQUAL_INT(5, index_3);
@@ -59,10 +58,27 @@ void it_should_insert_elements_at_beginning_and_at_end() {
     TEST_ASSERT_NULL(node_from_end_null);
 }
 
+void it_should_remove_items_at_beginning_and_at_end() {
+    // given
+    SLinkedList *list = create_linked_list();
+
+    add_item_first(list, 18);
+    add_item_first(list, 23);
+    add_item_first(list, 500);
+    add_item_first(list, -99);
+    add_item_first(list, 145);
+
+    TEST_ASSERT_TRUE(list_contains(list, 500));
+    TEST_ASSERT_FALSE(list_contains(list, 501));
+
+    // TODO
+}
+
 int main() {
     UNITY_BEGIN();
 
-    RUN_TEST(it_should_insert_elements_at_beginning_and_at_end);
+    RUN_TEST(it_should_insert_items_at_beginning_and_at_end);
+    RUN_TEST(it_should_remove_items_at_beginning_and_at_end);
 
     return UNITY_END();
 }

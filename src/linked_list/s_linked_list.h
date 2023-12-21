@@ -16,10 +16,10 @@ typedef struct {
 } SLinkedList;
 
 SLinkedList *create_linked_list();
-void add_first(SLinkedList *list, int item);
-void add_last(SLinkedList *list, int item);
+void add_item_first(SLinkedList *list, int item);
+void add_item_last(SLinkedList *list, int item);
 int index_of_item(SLinkedList *list, int item);
-bool contains(SLinkedList *list, int item);
+bool list_contains(SLinkedList *list, int item);
 void remove_first(SLinkedList *list);
 void remove_last(SLinkedList *list);
 void remove_at_index(SLinkedList *list, int index);

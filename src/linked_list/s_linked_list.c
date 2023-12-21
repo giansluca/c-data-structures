@@ -14,7 +14,7 @@ SLinkedList *create_linked_list() {
     return new_list;
 }
 
-void add_first(SLinkedList *list, int item) {
+void add_item_first(SLinkedList *list, int item) {
     Node *node = malloc(sizeof(Node));
     node->data = item;
     node->next = NULL;
@@ -31,7 +31,7 @@ void add_first(SLinkedList *list, int item) {
     list->size++;
 }
 
-void add_last(SLinkedList *list, int item) {
+void add_item_last(SLinkedList *list, int item) {
     Node *node = malloc(sizeof(Node));
     node->data = item;
     node->next = NULL;
@@ -62,7 +62,7 @@ int index_of_item(SLinkedList *list, int item) {
     return -1;
 }
 
-bool contains(SLinkedList *list, int item) {
+bool list_contains(SLinkedList *list, int item) {
     return index_of_item(list, item) != -1;
 }
 

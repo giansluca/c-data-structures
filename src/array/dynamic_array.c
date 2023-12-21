@@ -36,7 +36,7 @@ void insert_element(DynamicArray *array, int element) {
     array->count++;
 }
 
-void insert_at(DynamicArray *array, int element, int index) {
+void insert_element_at(DynamicArray *array, int element, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
         printf("Illegal index: %d\n", index);
@@ -57,7 +57,7 @@ void insert_at(DynamicArray *array, int element, int index) {
     array->count++;
 }
 
-void remove_at(DynamicArray *array, int index) {
+void remove_element_at(DynamicArray *array, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
         printf("Illegal index: %d\n", index);
@@ -73,7 +73,7 @@ void remove_at(DynamicArray *array, int index) {
     array->count--;
 }
 
-int index_of(DynamicArray *array, int element) {
+int index_of_element(DynamicArray *array, int element) {
     for (int i = 0; i < array->count; i++) {
         if (array->elements[i] == element) {
             return i;
@@ -83,7 +83,7 @@ int index_of(DynamicArray *array, int element) {
     return -1;
 }
 
-int max_element(DynamicArray *array) {
+int max_array_element(DynamicArray *array) {
     int max = array->elements[0];
 
     for (int i = 0; i < array->count; i++) {

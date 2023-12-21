@@ -66,7 +66,7 @@ void it_should_insert_and_remove_elements_at_index() {
     TEST_ASSERT_EQUAL_INT(230, array->elements[3]);
 
     // when insert at index 1
-    insert_at(array, 999, 1);
+    insert_element_at(array, 999, 1);
 
     TEST_ASSERT_EQUAL_INT(5, array->count);
     TEST_ASSERT_EQUAL_INT(7, array->elements[0]);
@@ -76,7 +76,7 @@ void it_should_insert_and_remove_elements_at_index() {
     TEST_ASSERT_EQUAL_INT(230, array->elements[4]);
 
     // when insert at index 0
-    insert_at(array, 888, 0);
+    insert_element_at(array, 888, 0);
     TEST_ASSERT_EQUAL_INT(6, array->count);
     TEST_ASSERT_EQUAL_INT(888, array->elements[0]);
     TEST_ASSERT_EQUAL_INT(7, array->elements[1]);
@@ -86,12 +86,12 @@ void it_should_insert_and_remove_elements_at_index() {
     TEST_ASSERT_EQUAL_INT(230, array->elements[5]);
 
     // when insert illegal index
-    insert_at(array, 150, -3);
-    insert_at(array, 150, 30);
+    insert_element_at(array, 150, -3);
+    insert_element_at(array, 150, 30);
     TEST_ASSERT_EQUAL_INT(6, array->count);
 
     // when remove at index 0
-    remove_at(array, 1);
+    remove_element_at(array, 1);
 
     TEST_ASSERT_EQUAL_INT(5, array->count);
     TEST_ASSERT_EQUAL_INT(888, array->elements[0]);
@@ -101,8 +101,8 @@ void it_should_insert_and_remove_elements_at_index() {
     TEST_ASSERT_EQUAL_INT(230, array->elements[4]);
 
     // when remove illegal index
-    remove_at(array, -1);
-    remove_at(array, 20);
+    remove_element_at(array, -1);
+    remove_element_at(array, 20);
     TEST_ASSERT_EQUAL_INT(5, array->count);
 }
 
@@ -116,10 +116,10 @@ void it_should_find_element_by_value() {
     insert_element(array, 9);
 
     // when
-    int first_element_index = index_of(array, 7);
-    int second_element_index = index_of(array, -2);
-    int third_element_index = index_of(array, 9);
-    int no_element_index = index_of(array, 1000);
+    int first_element_index = index_of_element(array, 7);
+    int second_element_index = index_of_element(array, -2);
+    int third_element_index = index_of_element(array, 9);
+    int no_element_index = index_of_element(array, 1000);
 
     // then
     TEST_ASSERT_EQUAL_INT(0, first_element_index);
@@ -138,7 +138,7 @@ void it_should_find_the_max_element() {
     insert_element(array, 9);
 
     // when
-    int max = max_element(array);
+    int max = max_array_element(array);
 
     TEST_ASSERT_EQUAL_INT(9, max);
 }
