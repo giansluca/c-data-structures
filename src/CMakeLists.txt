@@ -1,7 +1,7 @@
 set(SOURCE_FILES
         various/utils.c
         array/dynamic_array.c
-        linked_list/s_linked_list.c
+        linked_list/linked_list.c
         stack/array_stack.c
         queue/array_queue.c
         queue/priority_queue.c)
@@ -9,7 +9,7 @@ set(SOURCE_FILES
 set(HEADER_FILES
         various/utils.h
         array/dynamic_array.h
-        linked_list/s_linked_list.h
+        linked_list/linked_list.h
         stack/array_stack.h
         queue/array_queue.h
         queue/priority_queue.h)
