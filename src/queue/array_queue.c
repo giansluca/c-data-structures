@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-ArrayQueue *create_queue(int capacity) {
+ArrayQueue *create_array_queue(int capacity) {
     ArrayQueue *new_queue = malloc(sizeof(ArrayQueue));
     new_queue->capacity = capacity;
     new_queue->count = 0;
@@ -19,10 +19,10 @@ ArrayQueue *create_queue(int capacity) {
     return new_queue;
 }
 
-void enqueue(ArrayQueue *queue, int value) {
+void enqueue_item(ArrayQueue *queue, int value) {
     if (is_queue_full(queue)) {
-        printf("Queue is full!");
-        exit(-1);
+        printf("Queue is full!\n");
+        return;
     }
 
     queue->items[queue->rear] = value;
@@ -30,10 +30,10 @@ void enqueue(ArrayQueue *queue, int value) {
     queue->count++;
 }
 
-int dequeue(ArrayQueue *queue) {
+int dequeue_item(ArrayQueue *queue) {
     if (is_queue_empty(queue)) {
-        printf("Queue is empty!");
-        exit(-1);
+        printf("Queue is empty!\n");
+        return -1;
     }
 
     int item = queue->items[queue->front];
@@ -44,10 +44,10 @@ int dequeue(ArrayQueue *queue) {
     return item;
 }
 
-int get_front(ArrayQueue *queue) {
+int get_front_item(ArrayQueue *queue) {
     if (is_queue_empty(queue)) {
-        printf("Queue is empty!");
-        exit(-1);
+        printf("Queue is empty!\n");
+        return -1;
     }
 
     return queue->items[queue->front];

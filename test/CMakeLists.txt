@@ -18,3 +18,10 @@ target_sources(linked_list_test PRIVATE
     modules/linked_list_test.c
 )
 target_link_libraries(linked_list_test PRIVATE data-structures unity-framework)
+
+add_executable(queue_test)
+target_sources(queue_test PRIVATE 
+    header_test.h
+    modules/queue_test.c
+)
+target_link_libraries(queue_test PRIVATE data-structures unity-framework)

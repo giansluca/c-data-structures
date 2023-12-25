@@ -33,6 +33,7 @@ add_subdirectory(test)
 enable_testing()
 add_test(NAME Array COMMAND array_test)
 add_test(NAME LinkedList COMMAND linked_list_test)
+add_test(NAME Queue COMMAND queue_test)
 list(APPEND CMAKE_CTEST_ARGUMENTS "--verbose")
 
 # Example --> commands from project root

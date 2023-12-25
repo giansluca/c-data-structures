@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int shift_items_to_insert(PriorityQueue *p_queue, int item);
+int _shift_items_to_insert(PriorityQueue *p_queue, int item);
 
 PriorityQueue *create_priority_queue(int capacity) {
     PriorityQueue *p_queue = malloc(sizeof(PriorityQueue));
@@ -25,24 +25,9 @@ void add_p_queue(PriorityQueue *p_queue, int item) {
         exit(-1);
     }
 
-    int index = shift_items_to_insert(p_queue, item);
+    int index = _shift_items_to_insert(p_queue, item);
     p_queue->items[index] = item;
     p_queue->count++;
-}
-
-/*
- * Shift items to insert new item in the correct priority order
- */
-int shift_items_to_insert(PriorityQueue *p_queue, int item) {
-    int i;
-    for (i = p_queue->count - 1; i >= 0; i--) {
-        if (p_queue->items[i] > item)
-            p_queue->items[i + 1] = p_queue->items[i];
-        else
-            break;
-    }
-
-    return i + 1;
 }
 
 int remove_p_queue(PriorityQueue *p_queue) {
@@ -67,4 +52,19 @@ void print_priority_queue(PriorityQueue *p_queue) {
     for (int i = 0; i < p_queue->capacity; i++) {
         printf("%d\n", p_queue->items[i]);
     }
+}
+
+/*
+ * Shift items to insert new item in the correct priority order
+ */
+int _shift_items_to_insert(PriorityQueue *p_queue, int item) {
+    int i;
+    for (i = p_queue->count - 1; i >= 0; i--) {
+        if (p_queue->items[i] > item)
+            p_queue->items[i + 1] = p_queue->items[i];
+        else
+            break;
+    }
+
+    return i + 1;
 }
