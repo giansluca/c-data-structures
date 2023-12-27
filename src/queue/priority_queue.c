@@ -22,7 +22,7 @@ PriorityQueue *create_priority_queue(int capacity) {
 void add_p_queue(PriorityQueue *p_queue, int item) {
     if (is_p_queue_full(p_queue)) {
         printf("Queue is full!");
-        exit(-1);
+        return;
     }
 
     int index = _shift_items_to_insert(p_queue, item);
@@ -33,7 +33,7 @@ void add_p_queue(PriorityQueue *p_queue, int item) {
 int remove_p_queue(PriorityQueue *p_queue) {
     if (is_p_queue_empty(p_queue)) {
         printf("Queue is empty!");
-        exit(-1);
+        return -1;
     }
 
     p_queue->count--;
