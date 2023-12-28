@@ -9,13 +9,17 @@ typedef struct {
     int *items;
 } ArrayStack;
 
-ArrayStack *create_array_stack(int length);
-void push(ArrayStack *stack, int value);
-int pop(ArrayStack *stack);
-int peek(ArrayStack *stack);
-bool is_array_stack_full(ArrayStack *stack);
-bool is_array_stack_empty(ArrayStack *stack);
-void print_array_stack(ArrayStack *stack);
-int *reverse_int_array(int array[], int size);
+struct arrayStackLib {
+    ArrayStack *(*create_stack)(int length);
+    void (*push)(ArrayStack *stack, int value);
+    int (*pop)(ArrayStack *stack);
+    int (*peek)(ArrayStack *stack);
+    bool (*is_full)(ArrayStack *stack);
+    bool (*is_empty)(ArrayStack *stack);
+    int *(*reverse_array)(int array[], int length);
+    void (*print)(ArrayStack *stack);
+};
+
+extern const struct arrayStackLib ArrayStackLib;
 
 #endif // DATASTRUCTURES_ARRAY_STACK_H

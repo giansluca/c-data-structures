@@ -4,16 +4,16 @@
 
 void it_should_create_array_stack_add_and_remove_items() {
     // given
-    ArrayStack *stack = create_array_stack(5);
+    ArrayStack *stack = ArrayStackLib.create_stack(5);
 
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(0, stack->count);
 
     // when push
-    push(stack, 45);
-    push(stack, 34);
-    push(stack, 2);
-    push(stack, 65);
+    ArrayStackLib.push(stack, 45);
+    ArrayStackLib.push(stack, 34);
+    ArrayStackLib.push(stack, 2);
+    ArrayStackLib.push(stack, 65);
 
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(4, stack->count);
@@ -23,37 +23,37 @@ void it_should_create_array_stack_add_and_remove_items() {
     TEST_ASSERT_EQUAL_INT(65, *(stack->items + 3));
 
     // when pop
-    int pop_item_1 = pop(stack);
+    int pop_item_1 = ArrayStackLib.pop(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(3, stack->count);
     TEST_ASSERT_EQUAL_INT(65, pop_item_1);
 
     // when peak
-    int peak_item_1 = peek(stack);
+    int peak_item_1 = ArrayStackLib.peek(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(3, stack->count);
     TEST_ASSERT_EQUAL_INT(2, peak_item_1);
 
     // when pop again
-    int pop_item_2 = pop(stack);
+    int pop_item_2 = ArrayStackLib.pop(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(2, stack->count);
     TEST_ASSERT_EQUAL_INT(2, pop_item_2);
 
     // when peak again
-    int peak_item_2 = peek(stack);
+    int peak_item_2 = ArrayStackLib.peek(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(2, stack->count);
     TEST_ASSERT_EQUAL_INT(34, peak_item_2);
 }
 
-void it_should_reverse_it_array() {
+void it_should_reverse_an_array() {
     // given
     int array[] = {0, 1, 2, 3, 4, 5, 6, 7};
     int arraySize = sizeof(array) / sizeof(array[0]);
 
     // when
-    int *reversed_array = reverse_int_array(array, arraySize);
+    int *reversed_array = ArrayStackLib.reverse_array(array, arraySize);
 
     // then
     TEST_ASSERT_EQUAL_INT(7, *(reversed_array));
@@ -70,7 +70,7 @@ int main() {
     UNITY_BEGIN();
 
     RUN_TEST(it_should_create_array_stack_add_and_remove_items);
-    RUN_TEST(it_should_reverse_it_array);
+    RUN_TEST(it_should_reverse_an_array);
 
     return UNITY_END();
 }

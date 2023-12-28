@@ -3,7 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-ArrayStack *create_array_stack(int length) {
+bool is_full(ArrayStack *ArrayStack);
+bool is_empty(ArrayStack *ArrayStack);
+ArrayStack *create_stack(int length);
+
+ArrayStack *create_stack(int length) {
     ArrayStack *ArrayStack = malloc(sizeof(ArrayStack));
     ArrayStack->capacity = length;
     ArrayStack->count = 0;
@@ -18,7 +22,7 @@ ArrayStack *create_array_stack(int length) {
 }
 
 void push(ArrayStack *ArrayStack, int value) {
-    if (is_array_stack_full(ArrayStack)) {
+    if (is_full(ArrayStack)) {
         printf("ArrayStack is full!");
         return;
     }
@@ -28,7 +32,7 @@ void push(ArrayStack *ArrayStack, int value) {
 }
 
 int pop(ArrayStack *ArrayStack) {
-    if (is_array_stack_empty(ArrayStack)) {
+    if (is_empty(ArrayStack)) {
         printf("ArrayStack is empty");
         return -1;
     }
@@ -38,7 +42,7 @@ int pop(ArrayStack *ArrayStack) {
 }
 
 int peek(ArrayStack *ArrayStack) {
-    if (is_array_stack_empty(ArrayStack)) {
+    if (is_empty(ArrayStack)) {
         printf("ArrayStack is empty");
         return -1;
     }
@@ -46,35 +50,45 @@ int peek(ArrayStack *ArrayStack) {
     return ArrayStack->items[ArrayStack->count - 1];
 }
 
-bool is_array_stack_full(ArrayStack *ArrayStack) {
+bool is_full(ArrayStack *ArrayStack) {
     return ArrayStack->count == ArrayStack->capacity;
 }
 
-bool is_array_stack_empty(ArrayStack *ArrayStack) {
+bool is_empty(ArrayStack *ArrayStack) {
     return ArrayStack->count == 0;
 }
 
-void print_array_stack(ArrayStack *ArrayStack) {
-    int i;
-    for (i = 0; i < ArrayStack->count; i++) {
-        printf("%d\n", ArrayStack->items[i]);
-    }
-}
-
-int *reverse_int_array(int array[], int size) {
+int *reverse_array(int array[], int length) {
     // push all array element in a stack
-    ArrayStack *stack = create_array_stack(size);
+    ArrayStack *stack = create_stack(length);
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < length; i++)
         push(stack, array[i]);
 
     // pop the stack to the new reversed array
-    int *reversed_array = malloc(size * sizeof(int));
+    int *reversed_array = malloc(length * sizeof(int));
 
-    for (int j = 0; j < size; j++)
+    for (int j = 0; j < length; j++)
         reversed_array[j] = pop(stack);
 
     free(stack);
 
     return reversed_array;
 }
+
+void print(ArrayStack *ArrayStack) {
+    int i;
+    for (i = 0; i < ArrayStack->count; i++) {
+        printf("%d\n", ArrayStack->items[i]);
+    }
+}
+
+const struct arrayStackLib ArrayStackLib = {
+    .create_stack = create_stack,
+    .push = push,
+    .pop = pop,
+    .peek = peek,
+    .is_full = is_full,
+    .is_empty = is_empty,
+    .reverse_array = reverse_array,
+    .print = print};

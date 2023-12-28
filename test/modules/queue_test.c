@@ -6,12 +6,12 @@
 // ARRAY QUEUE
 void it_should_create_array_queue_add_and_remove_items() {
     // given
-    ArrayQueue *queue = create_array_queue(5);
+    ArrayQueue *queue = ArrayQueueLib.create_queue(5);
 
     // when add items
-    enqueue_item(queue, 10);
-    enqueue_item(queue, 20);
-    enqueue_item(queue, -30);
+    ArrayQueueLib.enqueue(queue, 10);
+    ArrayQueueLib.enqueue(queue, 20);
+    ArrayQueueLib.enqueue(queue, -30);
 
     TEST_ASSERT_EQUAL_INT(5, queue->capacity);
     TEST_ASSERT_EQUAL_INT(3, queue->count);
@@ -27,7 +27,7 @@ void it_should_create_array_queue_add_and_remove_items() {
     TEST_ASSERT_EQUAL_INT(-30, last_1);
 
     // when remove items
-    int item_1 = dequeue_item(queue);
+    int item_1 = ArrayQueueLib.dequeue(queue);
 
     TEST_ASSERT_EQUAL_INT(10, item_1);
     TEST_ASSERT_EQUAL_INT(5, queue->capacity);
@@ -41,9 +41,9 @@ void it_should_create_array_queue_add_and_remove_items() {
     TEST_ASSERT_EQUAL_INT(-30, last_2);
 
     // when add again
-    enqueue_item(queue, 99);
-    enqueue_item(queue, 200);
-    enqueue_item(queue, 3500);
+    ArrayQueueLib.enqueue(queue, 99);
+    ArrayQueueLib.enqueue(queue, 200);
+    ArrayQueueLib.enqueue(queue, 3500);
 
     TEST_ASSERT_EQUAL_INT(5, queue->capacity);
     TEST_ASSERT_EQUAL_INT(5, queue->count);
@@ -55,7 +55,7 @@ void it_should_create_array_queue_add_and_remove_items() {
     TEST_ASSERT_EQUAL_INT(20, first_3);
     TEST_ASSERT_EQUAL_INT(3500, last_3);
 
-    int front = get_front_item(queue);
+    int front = ArrayQueueLib.get_front(queue);
     TEST_ASSERT_EQUAL_INT(20, front);
 }
 

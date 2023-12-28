@@ -11,12 +11,16 @@ typedef struct {
     int *items;
 } ArrayQueue;
 
-ArrayQueue *create_array_queue(int capacity);
-void enqueue_item(ArrayQueue *queue, int value);
-int dequeue_item(ArrayQueue *queue);
-int get_front_item(ArrayQueue *queue);
-bool is_queue_full(ArrayQueue *queue);
-bool is_queue_empty(ArrayQueue *queue);
-void print_array_queue(ArrayQueue *queue);
+struct arrayQueueLib {
+    ArrayQueue *(*create_queue)(int capacity);
+    void (*enqueue)(ArrayQueue *queue, int value);
+    int (*dequeue)(ArrayQueue *queue);
+    int (*get_front)(ArrayQueue *queue);
+    bool (*is_full)(ArrayQueue *queue);
+    bool (*is_empty)(ArrayQueue *queue);
+    void (*print)(ArrayQueue *queue);
+};
+
+extern const struct arrayQueueLib ArrayQueueLib;
 
 #endif // DATASTRUCTURES_ARRAY_QUEUE_H
