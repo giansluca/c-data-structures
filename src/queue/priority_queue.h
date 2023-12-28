@@ -9,11 +9,15 @@ typedef struct {
     int *items;
 } PriorityQueue;
 
-PriorityQueue *create_priority_queue(int capacity);
-void add_to_priority_queue(PriorityQueue *p_queue, int item);
-int remove_from_priority_queue(PriorityQueue *p_queue);
-bool is_priority_queue_full(PriorityQueue *p_queue);
-bool is_priority_queue_empty(PriorityQueue *p_queue);
-void print_priority_queue(PriorityQueue *p_queue);
+struct PriorityQueueLib {
+    PriorityQueue *(*create_queue)(int capacity);
+    void (*enqueue)(PriorityQueue *queue, int value);
+    int (*dequeue)(PriorityQueue *queue);
+    bool (*is_full)(PriorityQueue *queue);
+    bool (*is_empty)(PriorityQueue *queue);
+    void (*print)(PriorityQueue *queue);
+};
+
+extern const struct PriorityQueueLib priorityQueueLib;
 
 #endif // DATASTRUCTURES_PRIORITY_QUEUE_H

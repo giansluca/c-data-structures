@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int _shift_items_to_insert(PriorityQueue *p_queue, int item);
+bool is_priority_queue_full(PriorityQueue *p_queue);
+bool is_priority_queue_empty(PriorityQueue *p_queue);
+int shift_priority_queue_items(PriorityQueue *p_queue, int value);
 
 PriorityQueue *create_priority_queue(int capacity) {
     PriorityQueue *p_queue = malloc(sizeof(PriorityQueue));
@@ -19,18 +21,18 @@ PriorityQueue *create_priority_queue(int capacity) {
     return p_queue;
 }
 
-void add_to_priority_queue(PriorityQueue *p_queue, int item) {
+void enqueue_priority_queue(PriorityQueue *p_queue, int value) {
     if (is_priority_queue_full(p_queue)) {
         printf("Queue is full!");
         return;
     }
 
-    int index = _shift_items_to_insert(p_queue, item);
-    p_queue->items[index] = item;
+    int index = shift_priority_queue_items(p_queue, value);
+    p_queue->items[index] = value;
     p_queue->count++;
 }
 
-int remove_from_priority_queue(PriorityQueue *p_queue) {
+int dequeue_priority_queue(PriorityQueue *p_queue) {
     if (is_priority_queue_empty(p_queue)) {
         printf("Queue is empty!");
         return -1;
@@ -57,10 +59,10 @@ void print_priority_queue(PriorityQueue *p_queue) {
 /*
  * Shift items to insert new item in the correct priority order
  */
-int _shift_items_to_insert(PriorityQueue *p_queue, int item) {
+int shift_priority_queue_items(PriorityQueue *p_queue, int value) {
     int i;
     for (i = p_queue->count - 1; i >= 0; i--) {
-        if (p_queue->items[i] > item)
+        if (p_queue->items[i] > value)
             p_queue->items[i + 1] = p_queue->items[i];
         else
             break;
@@ -68,3 +70,11 @@ int _shift_items_to_insert(PriorityQueue *p_queue, int item) {
 
     return i + 1;
 }
+
+const struct PriorityQueueLib priorityQueueLib = {
+    .create_queue = create_priority_queue,
+    .enqueue = enqueue_priority_queue,
+    .dequeue = dequeue_priority_queue,
+    .is_full = is_priority_queue_full,
+    .is_empty = is_priority_queue_empty,
+    .print = print_priority_queue};

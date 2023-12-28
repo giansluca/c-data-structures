@@ -9,7 +9,7 @@ typedef struct {
     int *items;
 } ArrayStack;
 
-struct arrayStackLib {
+struct ArrayStackLib {
     ArrayStack *(*create_stack)(int length);
     void (*push)(ArrayStack *stack, int value);
     int (*pop)(ArrayStack *stack);
@@ -20,6 +20,6 @@ struct arrayStackLib {
     void (*print)(ArrayStack *stack);
 };
 
-extern const struct arrayStackLib ArrayStackLib;
+extern const struct ArrayStackLib arrayStackLib;
 
 #endif // DATASTRUCTURES_ARRAY_STACK_H

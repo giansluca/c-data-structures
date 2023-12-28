@@ -11,7 +11,7 @@ typedef struct {
     int *items;
 } ArrayQueue;
 
-struct arrayQueueLib {
+struct ArrayQueueLib {
     ArrayQueue *(*create_queue)(int capacity);
     void (*enqueue)(ArrayQueue *queue, int value);
     int (*dequeue)(ArrayQueue *queue);
@@ -21,6 +21,6 @@ struct arrayQueueLib {
     void (*print)(ArrayQueue *queue);
 };
 
-extern const struct arrayQueueLib ArrayQueueLib;
+extern const struct ArrayQueueLib arrayQueueLib;
 
 #endif // DATASTRUCTURES_ARRAY_QUEUE_H

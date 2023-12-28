@@ -4,16 +4,16 @@
 
 void it_should_create_array_stack_add_and_remove_items() {
     // given
-    ArrayStack *stack = ArrayStackLib.create_stack(5);
+    ArrayStack *stack = arrayStackLib.create_stack(5);
 
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(0, stack->count);
 
     // when push
-    ArrayStackLib.push(stack, 45);
-    ArrayStackLib.push(stack, 34);
-    ArrayStackLib.push(stack, 2);
-    ArrayStackLib.push(stack, 65);
+    arrayStackLib.push(stack, 45);
+    arrayStackLib.push(stack, 34);
+    arrayStackLib.push(stack, 2);
+    arrayStackLib.push(stack, 65);
 
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(4, stack->count);
@@ -23,25 +23,25 @@ void it_should_create_array_stack_add_and_remove_items() {
     TEST_ASSERT_EQUAL_INT(65, *(stack->items + 3));
 
     // when pop
-    int pop_item_1 = ArrayStackLib.pop(stack);
+    int pop_item_1 = arrayStackLib.pop(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(3, stack->count);
     TEST_ASSERT_EQUAL_INT(65, pop_item_1);
 
     // when peak
-    int peak_item_1 = ArrayStackLib.peek(stack);
+    int peak_item_1 = arrayStackLib.peek(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(3, stack->count);
     TEST_ASSERT_EQUAL_INT(2, peak_item_1);
 
     // when pop again
-    int pop_item_2 = ArrayStackLib.pop(stack);
+    int pop_item_2 = arrayStackLib.pop(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(2, stack->count);
     TEST_ASSERT_EQUAL_INT(2, pop_item_2);
 
     // when peak again
-    int peak_item_2 = ArrayStackLib.peek(stack);
+    int peak_item_2 = arrayStackLib.peek(stack);
     TEST_ASSERT_EQUAL_INT(5, stack->capacity);
     TEST_ASSERT_EQUAL_INT(2, stack->count);
     TEST_ASSERT_EQUAL_INT(34, peak_item_2);
@@ -53,7 +53,7 @@ void it_should_reverse_an_array() {
     int arraySize = sizeof(array) / sizeof(array[0]);
 
     // when
-    int *reversed_array = ArrayStackLib.reverse_array(array, arraySize);
+    int *reversed_array = arrayStackLib.reverse_array(array, arraySize);
 
     // then
     TEST_ASSERT_EQUAL_INT(7, *(reversed_array));

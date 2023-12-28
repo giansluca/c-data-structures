@@ -2,12 +2,12 @@
 #define DATASTRUCTURES_S_LINKED_LIST_H
 
 #include <stdbool.h>
-
-typedef struct Node Node;
 struct Node {
     int data;
     struct Node *next;
 };
+
+typedef struct Node Node;
 
 typedef struct {
     Node *first;
