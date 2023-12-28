@@ -19,8 +19,8 @@ PriorityQueue *create_priority_queue(int capacity) {
     return p_queue;
 }
 
-void add_p_queue(PriorityQueue *p_queue, int item) {
-    if (is_p_queue_full(p_queue)) {
+void add_to_priority_queue(PriorityQueue *p_queue, int item) {
+    if (is_priority_queue_full(p_queue)) {
         printf("Queue is full!");
         return;
     }
@@ -30,8 +30,8 @@ void add_p_queue(PriorityQueue *p_queue, int item) {
     p_queue->count++;
 }
 
-int remove_p_queue(PriorityQueue *p_queue) {
-    if (is_p_queue_empty(p_queue)) {
+int remove_from_priority_queue(PriorityQueue *p_queue) {
+    if (is_priority_queue_empty(p_queue)) {
         printf("Queue is empty!");
         return -1;
     }
@@ -42,11 +42,11 @@ int remove_p_queue(PriorityQueue *p_queue) {
     return item;
 }
 
-bool is_p_queue_full(PriorityQueue *p_queue) {
+bool is_priority_queue_full(PriorityQueue *p_queue) {
     return p_queue->count == p_queue->capacity;
 }
 
-bool is_p_queue_empty(PriorityQueue *p_queue) { return p_queue->count == 0; }
+bool is_priority_queue_empty(PriorityQueue *p_queue) { return p_queue->count == 0; }
 
 void print_priority_queue(PriorityQueue *p_queue) {
     for (int i = 0; i < p_queue->capacity; i++) {
