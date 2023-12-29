@@ -15,23 +15,27 @@ typedef struct {
     int size;
 } LinkedList;
 
-LinkedList *create_linked_list();
-void add_item_first(LinkedList *list, int item);
-void add_item_last(LinkedList *list, int item);
-int index_of_item(LinkedList *list, int item);
-bool list_contains(LinkedList *list, int item);
-void remove_item_first(LinkedList *list);
-void remove_item_last(LinkedList *list);
-void remove_item_at(LinkedList *list, int index);
-int list_size(LinkedList *list);
-int *convert_list_to_array(LinkedList *list, int arraySize);
-void reverse_list(LinkedList *list);
-void reverse_list_recursive(LinkedList *list, Node *head);
-bool is_list_empty(LinkedList *list);
-Node *get_node_at_index(LinkedList *list, int index);
-Node *get_node_at_index_from_end(LinkedList *list, int index);
-void print_linked_list(LinkedList *list);
-void print_linked_list_recursive(Node *head);
-void print_linked_list_reverse_recursive(Node *head);
+struct LinkedListLib {
+    LinkedList *(*create_linked_list)(void);
+    void (*add_front)(LinkedList *list, int value);
+    void (*add_back)(LinkedList *list, int value);
+    int (*index_of)(LinkedList *list, int value);
+    bool (*contains)(LinkedList *list, int value);
+    void (*remove_front)(LinkedList *list);
+    void (*remove_back)(LinkedList *list);
+    void (*remove_at)(LinkedList *list, int index);
+    int (*size)(LinkedList *list);
+    int *(*to_array)(LinkedList *list);
+    void (*reverse)(LinkedList *list);
+    void (*reverse_recursive)(LinkedList *list, Node *head);
+    bool (*is_empty)(LinkedList *list);
+    Node *(*get_node_at)(LinkedList *list, int index);
+    Node *(*get_node_at_from_end)(LinkedList *list, int index);
+    void (*print)(LinkedList *list);
+    void (*print_recursive)(Node *head);
+    void (*print_reverse_recursive)(Node *head);
+};
+
+extern const struct LinkedListLib linkedListLib;
 
 #endif // DATASTRUCTURES_S_LINKED_LIST_H

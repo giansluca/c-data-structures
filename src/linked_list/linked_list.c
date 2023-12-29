@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *_get_previous(LinkedList *list, Node *node);
+int linked_list_index_of(LinkedList *list, int item);
+bool is_linked_list_empty(LinkedList *list);
+Node *get_linked_list_previous_node(LinkedList *list, Node *node);
 
 LinkedList *create_linked_list() {
     LinkedList *new_list = malloc(sizeof(LinkedList));
@@ -14,13 +16,13 @@ LinkedList *create_linked_list() {
     return new_list;
 }
 
-void add_item_first(LinkedList *list, int item) {
+void add_item_linked_list_front(LinkedList *list, int value) {
     Node *node = malloc(sizeof(Node));
-    node->data = item;
+    node->data = value;
     node->next = NULL;
 
     // check if the list is empty
-    if (is_list_empty(list)) {
+    if (is_linked_list_empty(list)) {
         list->first = node;
         list->last = node;
     } else {
@@ -31,12 +33,12 @@ void add_item_first(LinkedList *list, int item) {
     list->size++;
 }
 
-void add_item_last(LinkedList *list, int item) {
+void add_item_linked_list_back(LinkedList *list, int value) {
     Node *node = malloc(sizeof(Node));
-    node->data = item;
+    node->data = value;
     node->next = NULL;
 
-    if (is_list_empty(list)) {
+    if (is_linked_list_empty(list)) {
         list->first = node;
         list->last = node;
     } else {
@@ -47,12 +49,12 @@ void add_item_last(LinkedList *list, int item) {
     list->size++;
 }
 
-int index_of_item(LinkedList *list, int item) {
+int linked_list_index_of(LinkedList *list, int value) {
     int index = 0;
     Node *node = list->first;
 
     while (node != NULL) {
-        if (node->data == item)
+        if (node->data == value)
             return index;
 
         node = node->next;
@@ -62,12 +64,12 @@ int index_of_item(LinkedList *list, int item) {
     return -1;
 }
 
-bool list_contains(LinkedList *list, int item) {
-    return index_of_item(list, item) != -1;
+bool linked_list_contains(LinkedList *list, int value) {
+    return linked_list_index_of(list, value) != -1;
 }
 
-void remove_item_first(LinkedList *list) {
-    if (is_list_empty(list)) {
+void remove_item_linked_list_front(LinkedList *list) {
+    if (is_linked_list_empty(list)) {
         printf("List is already empty\n");
         return;
     }
@@ -86,8 +88,8 @@ void remove_item_first(LinkedList *list) {
     list->size--;
 }
 
-void remove_item_last(LinkedList *list) {
-    if (is_list_empty(list)) {
+void remove_item_linked_list_back(LinkedList *list) {
+    if (is_linked_list_empty(list)) {
         printf("List is already empty\n");
         return;
     }
@@ -99,7 +101,7 @@ void remove_item_last(LinkedList *list) {
         free(temp);
     } else {
         // get previous node
-        Node *previous = _get_previous(list, list->last);
+        Node *previous = get_linked_list_previous_node(list, list->last);
         previous->next = NULL;
 
         Node *temp = list->last;
@@ -114,7 +116,7 @@ void remove_item_at(LinkedList *list, int index) {
     if (index >= list->size || index < 0) {
         printf("Invalid index\n");
         return;
-    } else if (is_list_empty(list)) {
+    } else if (is_linked_list_empty(list)) {
         printf("List is already empty\n");
         return;
     }
@@ -143,11 +145,11 @@ void remove_item_at(LinkedList *list, int index) {
     list->size--;
 }
 
-int list_size(LinkedList *list) { return list->size; }
+int linked_list_size(LinkedList *list) { return list->size; }
 
-int *convert_list_to_array(LinkedList *list, int arraySize) {
+int *convert_linked_list_to_array(LinkedList *list) {
     Node *current = list->first;
-    int *array = malloc(arraySize * sizeof(int));
+    int *array = malloc(list->size * sizeof(int));
 
     int index = 0;
     while (current != NULL) {
@@ -161,7 +163,7 @@ int *convert_list_to_array(LinkedList *list, int arraySize) {
     return array;
 }
 
-void reverse_list(LinkedList *list) {
+void reverse_linked_list(LinkedList *list) {
     Node *previous = list->first;
     Node *current = list->first->next;
 
@@ -178,26 +180,26 @@ void reverse_list(LinkedList *list) {
     list->first = previous;
 }
 
-void reverse_list_recursive(LinkedList *list, Node *head) {
+void reverse_linked_list_recursive(LinkedList *list, Node *head) {
     if (head->next == NULL) {
         list->last = list->first;
         list->first = head;
         return;
     }
 
-    reverse_list_recursive(list, head->next);
+    reverse_linked_list_recursive(list, head->next);
 
     Node *temp = head->next;
     temp->next = head;
     head->next = NULL;
 }
 
-bool is_list_empty(LinkedList *list) {
+bool is_linked_list_empty(LinkedList *list) {
     return list->first == NULL;
 }
 
-Node *get_node_at_index(LinkedList *list, int index) {
-    if (is_list_empty(list)) {
+Node *get_linked_list_node_at(LinkedList *list, int index) {
+    if (is_linked_list_empty(list)) {
         printf("List is empty\n");
         return NULL;
     }
@@ -215,8 +217,8 @@ Node *get_node_at_index(LinkedList *list, int index) {
     return node;
 }
 
-Node *get_node_at_index_from_end(LinkedList *list, int index) {
-    if (is_list_empty(list)) {
+Node *get_linked_list_node_at_from_end(LinkedList *list, int index) {
+    if (is_linked_list_empty(list)) {
         printf("List is empty\n");
         return NULL;
     }
@@ -265,7 +267,7 @@ void print_linked_list_reverse_recursive(Node *head) {
     printf("%d\n", head->data);
 }
 
-Node *_get_previous(LinkedList *list, Node *node) {
+Node *get_linked_list_previous_node(LinkedList *list, Node *node) {
     Node *current = list->first;
 
     while (current != NULL) {
@@ -277,3 +279,23 @@ Node *_get_previous(LinkedList *list, Node *node) {
 
     return NULL;
 }
+
+const struct LinkedListLib linkedListLib = {
+    .create_linked_list = create_linked_list,
+    .add_front = add_item_linked_list_front,
+    .add_back = add_item_linked_list_back,
+    .index_of = linked_list_index_of,
+    .contains = linked_list_contains,
+    .remove_front = remove_item_linked_list_front,
+    .remove_back = remove_item_linked_list_back,
+    .remove_at = remove_item_at,
+    .size = linked_list_size,
+    .to_array = convert_linked_list_to_array,
+    .reverse = reverse_linked_list,
+    .reverse_recursive = reverse_linked_list_recursive,
+    .is_empty = is_linked_list_empty,
+    .get_node_at = get_linked_list_node_at,
+    .get_node_at_from_end = get_linked_list_node_at_from_end,
+    .print = print_linked_list,
+    .print_recursive = print_linked_list_recursive,
+    .print_reverse_recursive = print_linked_list_reverse_recursive};
