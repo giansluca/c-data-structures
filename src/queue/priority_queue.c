@@ -5,7 +5,7 @@
 
 bool is_priority_queue_full(PriorityQueue *p_queue);
 bool is_priority_queue_empty(PriorityQueue *p_queue);
-int shift_priority_queue_items(PriorityQueue *p_queue, int value);
+int _shift_priority_queue_items(PriorityQueue *p_queue, int value);
 
 PriorityQueue *create_priority_queue(int capacity) {
     PriorityQueue *p_queue = malloc(sizeof(PriorityQueue));
@@ -27,7 +27,7 @@ void enqueue_priority_queue(PriorityQueue *p_queue, int value) {
         return;
     }
 
-    int index = shift_priority_queue_items(p_queue, value);
+    int index = _shift_priority_queue_items(p_queue, value);
     p_queue->items[index] = value;
     p_queue->count++;
 }
@@ -59,7 +59,7 @@ void print_priority_queue(PriorityQueue *p_queue) {
 /*
  * Shift items to insert new item in the correct priority order
  */
-int shift_priority_queue_items(PriorityQueue *p_queue, int value) {
+int _shift_priority_queue_items(PriorityQueue *p_queue, int value) {
     int i;
     for (i = p_queue->count - 1; i >= 0; i--) {
         if (p_queue->items[i] > value)

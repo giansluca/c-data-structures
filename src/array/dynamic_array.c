@@ -5,15 +5,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void add_dynamic_array(DynamicArray *array, int value);
+bool dynamic_array_is_present(DynamicArray *array, int element);
 void _extend_array(DynamicArray *array);
 
 DynamicArray *create_array(int initial_capacity) {
-    // allocate space for the struct
     DynamicArray *new_array = malloc(sizeof(DynamicArray));
     new_array->capacity = initial_capacity;
     new_array->count = 0;
-
-    // allocate space for the array
     new_array->elements = malloc(initial_capacity * sizeof(int));
 
     // initialize array element to 0
@@ -24,7 +23,7 @@ DynamicArray *create_array(int initial_capacity) {
     return new_array;
 }
 
-void insert_element(DynamicArray *array, int element) {
+void add_dynamic_array(DynamicArray *array, int value) {
     // if array is full, extend the array.
     if (array->count == array->capacity) {
         _extend_array(array);
@@ -32,11 +31,11 @@ void insert_element(DynamicArray *array, int element) {
 
     // insert new element
     int index = array->count;
-    array->elements[index] = element;
+    array->elements[index] = value;
     array->count++;
 }
 
-void insert_element_at(DynamicArray *array, int element, int index) {
+void add_dynamic_array_at(DynamicArray *array, int value, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
         printf("Illegal index: %d\n", index);
@@ -53,11 +52,11 @@ void insert_element_at(DynamicArray *array, int element, int index) {
         array->elements[i + 1] = array->elements[i];
     }
 
-    array->elements[index] = element;
+    array->elements[index] = value;
     array->count++;
 }
 
-void remove_element_at(DynamicArray *array, int index) {
+void remove_dynamic_array_at(DynamicArray *array, int index) {
     // validate the index
     if (index < 0 || index >= array->count) {
         printf("Illegal index: %d\n", index);
@@ -73,9 +72,9 @@ void remove_element_at(DynamicArray *array, int index) {
     array->count--;
 }
 
-int index_of_element(DynamicArray *array, int element) {
+int dynamic_array_index_of(DynamicArray *array, int value) {
     for (int i = 0; i < array->count; i++) {
-        if (array->elements[i] == element) {
+        if (array->elements[i] == value) {
             return i;
         }
     }
@@ -83,7 +82,7 @@ int index_of_element(DynamicArray *array, int element) {
     return -1;
 }
 
-int max_array_element(DynamicArray *array) {
+int dynamic_array_max(DynamicArray *array) {
     int max = array->elements[0];
 
     for (int i = 0; i < array->count; i++) {
@@ -95,7 +94,7 @@ int max_array_element(DynamicArray *array) {
     return max;
 }
 
-void reverse_array(DynamicArray *array) {
+void reverse_dynamic_array(DynamicArray *array) {
     int start = 0;
     int end = array->count - 1;
 
@@ -107,7 +106,7 @@ void reverse_array(DynamicArray *array) {
     }
 }
 
-DynamicArray *find_commons_elements(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size) {
+DynamicArray *dynamic_array_find_commons(DynamicArray *array, int array_to_compare[], size_t array_to_compare_size) {
     // get size for the result array and allocate space as the max result possible
     DynamicArray *result = malloc(sizeof(DynamicArray));
     result->capacity = array->capacity;
@@ -120,21 +119,21 @@ DynamicArray *find_commons_elements(DynamicArray *array, int array_to_compare[],
 
         for (int j = 0; j < array_to_compare_size; j++) {
             if (array_to_compare[j] == element) {
-                if (is_element_present(result, element))
+                if (dynamic_array_is_present(result, element))
                     continue;
 
-                insert_element(result, element);
+                add_dynamic_array(result, element);
             }
         }
     }
     return result;
 }
 
-bool is_element_present(DynamicArray *array, int element) {
+bool dynamic_array_is_present(DynamicArray *array, int value) {
     bool is_present = false;
 
     for (int i = 0; i < array->count; i++) {
-        if (array->elements[i] == element) {
+        if (array->elements[i] == value) {
             is_present = true;
         }
     }
@@ -166,3 +165,15 @@ void _extend_array(DynamicArray *array) {
     array->elements = new_elements;
     array->capacity = new_capacity;
 }
+
+const struct DynamicArrayLib dynamicArrayLib = {
+    .create_array = create_array,
+    .add = add_dynamic_array,
+    .add_at = add_dynamic_array_at,
+    .remove_at = remove_dynamic_array_at,
+    .index_of = dynamic_array_index_of,
+    .max = dynamic_array_max,
+    .reverse = reverse_dynamic_array,
+    .find_commons = dynamic_array_find_commons,
+    .is_present = dynamic_array_is_present,
+    .print = print_dynamic_array};

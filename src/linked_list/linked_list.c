@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int linked_list_index_of(LinkedList *list, int item);
+int linked_list_index_of(LinkedList *list, int value);
 bool is_linked_list_empty(LinkedList *list);
-Node *get_linked_list_previous_node(LinkedList *list, Node *node);
+Node *_get_linked_list_previous_node(LinkedList *list, Node *node);
 
 LinkedList *create_linked_list() {
     LinkedList *new_list = malloc(sizeof(LinkedList));
@@ -16,7 +16,7 @@ LinkedList *create_linked_list() {
     return new_list;
 }
 
-void add_item_linked_list_front(LinkedList *list, int value) {
+void add_linked_list_front(LinkedList *list, int value) {
     Node *node = malloc(sizeof(Node));
     node->data = value;
     node->next = NULL;
@@ -33,7 +33,7 @@ void add_item_linked_list_front(LinkedList *list, int value) {
     list->size++;
 }
 
-void add_item_linked_list_back(LinkedList *list, int value) {
+void add_linked_list_back(LinkedList *list, int value) {
     Node *node = malloc(sizeof(Node));
     node->data = value;
     node->next = NULL;
@@ -68,7 +68,7 @@ bool linked_list_contains(LinkedList *list, int value) {
     return linked_list_index_of(list, value) != -1;
 }
 
-void remove_item_linked_list_front(LinkedList *list) {
+void remove_linked_list_front(LinkedList *list) {
     if (is_linked_list_empty(list)) {
         printf("List is already empty\n");
         return;
@@ -88,7 +88,7 @@ void remove_item_linked_list_front(LinkedList *list) {
     list->size--;
 }
 
-void remove_item_linked_list_back(LinkedList *list) {
+void remove_linked_list_back(LinkedList *list) {
     if (is_linked_list_empty(list)) {
         printf("List is already empty\n");
         return;
@@ -101,7 +101,7 @@ void remove_item_linked_list_back(LinkedList *list) {
         free(temp);
     } else {
         // get previous node
-        Node *previous = get_linked_list_previous_node(list, list->last);
+        Node *previous = _get_linked_list_previous_node(list, list->last);
         previous->next = NULL;
 
         Node *temp = list->last;
@@ -112,7 +112,7 @@ void remove_item_linked_list_back(LinkedList *list) {
     list->size--;
 }
 
-void remove_item_at(LinkedList *list, int index) {
+void remove_at(LinkedList *list, int index) {
     if (index >= list->size || index < 0) {
         printf("Invalid index\n");
         return;
@@ -267,7 +267,7 @@ void print_linked_list_reverse_recursive(Node *head) {
     printf("%d\n", head->data);
 }
 
-Node *get_linked_list_previous_node(LinkedList *list, Node *node) {
+Node *_get_linked_list_previous_node(LinkedList *list, Node *node) {
     Node *current = list->first;
 
     while (current != NULL) {
@@ -282,13 +282,13 @@ Node *get_linked_list_previous_node(LinkedList *list, Node *node) {
 
 const struct LinkedListLib linkedListLib = {
     .create_linked_list = create_linked_list,
-    .add_front = add_item_linked_list_front,
-    .add_back = add_item_linked_list_back,
+    .add_front = add_linked_list_front,
+    .add_back = add_linked_list_back,
     .index_of = linked_list_index_of,
     .contains = linked_list_contains,
-    .remove_front = remove_item_linked_list_front,
-    .remove_back = remove_item_linked_list_back,
-    .remove_at = remove_item_at,
+    .remove_front = remove_linked_list_front,
+    .remove_back = remove_linked_list_back,
+    .remove_at = remove_at,
     .size = linked_list_size,
     .to_array = convert_linked_list_to_array,
     .reverse = reverse_linked_list,
